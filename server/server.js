@@ -1,5 +1,6 @@
 
 var express = require('express'),
+    querystring = require('querystring'),
     bodyParser = require('body-parser'),
     request = require('request'),
     fs = require('fs'),
@@ -27,18 +28,24 @@ var server = app.listen(port, function() {
 var baseUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 
 
-app.post('/coordinates/', function(request, response) {
-    console.log(request.body); 
+app.post('/coordinates/', function(req, response) {
+    console.log(req.body); 
 
-    var apiUrl = baseUrl + request.body.address + "&key=" + apiKey;
+    var apiUrl = baseUrl + req.body.address + "&key=" + apiKey;
     console.log(apiUrl); 
+    console.log('ses');
     
 
 
-    request(apiUrl, function(error, response, body) {
+    request(apiUrl, function(err, res, body) {
         try {
-        var formattedAddress = body.results[0].formatted_address;
-        var location = body.results[0].geometry.location;
+            console.log('body');
+            console.log(body);
+            body = JSON.parse(body);
+            var formattedAddress = body.results[0].formatted_address;
+            console.log(formattedAddress);
+            var location = body.results[0].geometry.location;
+            console.log(location);
         }
         catch (err) {
             console.log(err);
@@ -58,7 +65,7 @@ app.post('/coordinates/', function(request, response) {
         response.end();
         
     });
-    response.end();
+    //response.end();
 });
 
 
