@@ -1,0 +1,14 @@
+{
+  "name": "Tsatter",
+  "description": "Chat thingy",
+  "dependencies": {
+    "express": "*",
+    "express-session": "*",
+    "body-parser": "*"
+  },
+
+  "scripts": {
+    "start": "node server/server.js"
+  }
+
+}
