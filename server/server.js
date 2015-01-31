@@ -15,5 +15,10 @@ var server = app.listen(port, function() {
     console.log('listening');
 });
 
+app.post('/coordinates/', function(request, response) {
+    console.log(request.body); 
+    response.end();
+});
+
 
 
