@@ -36,8 +36,16 @@ app.post('/coordinates/', function(request, response) {
 
 
     request(apiUrl, function(error, response, body) {
+        try {
         var formattedAddress = body.results[0].formatted_address;
         var location = body.results[0].geometry.location;
+        }
+        catch (err) {
+            console.log(err);
+            response.write(err);
+            response.end();
+            return;
+        }
 
         var obj = {
            address: formattedAddress,
