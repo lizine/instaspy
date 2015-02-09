@@ -1,11 +1,24 @@
-app.controller('TwitterCtrl', ['$scope', '$resource', function ($scope, $resource) {
+  app.factory("InstagramAPI", ['$http', function($http) {
+	var client_id = '5005fb61f69a4b44ad53ab6bc2662431';
+    return {
+      fetchPopular: function(callback){
+        var endpoint = "https://api.instagram.com/v1/media/popular";
+        endpoint += "?count=15";
+        endpoint += "&client_id=" + client_id;
+        endpoint += "&callback=JSON_CALLBACK";
+        $http.jsonp(endpoint).success(function(response){
+          callback(response.data);
+        });
+      }
+    }
+  }]);
+
+app.controller('TwitterCtrl', function ($scope, InstagramAPI) {
+	$scope.data = {};
+	InstagramAPI.fetchPopular(function(data){
+		$scope.pics = data;
+
+	});  
+});
 
 
- $scope.twitter = $resource('http://search.twitter.com/:action',
- {action:'search.json', q:'angularjs', callback:'JSON_CALLBACK'},
- {get:{method:'JSONP'}});
-
- $scope.searchTweet = function(){
-   $scope.twitterResult = $scope.twitter.get({q:$scope.searchTerm});
-  };
-}]);
