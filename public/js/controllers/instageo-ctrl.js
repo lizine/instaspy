@@ -22,7 +22,7 @@
   }]);
 
 
-app.controller('TwitterCtrl', function ($scope, InstagramAPI) {
+app.controller('InstaGeoCtrl', function ($scope, InstagramAPI) {
 	
 
   
