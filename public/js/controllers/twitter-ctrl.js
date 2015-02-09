@@ -4,10 +4,9 @@
   
 
     return {
-      fetchPopular: function(lon,lat, callback){
+      fetchGeo: function(lon,lat, callback){
         var endpoint = "https://api.instagram.com/v1/media/search?";
-        var lat = lat;
-        var lon = lon;
+        
         
         
         endpoint += "&client_id=5005fb61f69a4b44ad53ab6bc2662431";
@@ -28,11 +27,11 @@ app.controller('TwitterCtrl', function ($scope, InstagramAPI) {
 
   
 
-  $scope.searchTweet = function(lon,lat){
+  $scope.searchPictures = function(lon,lat){
   $scope.data = {};
 
 
-	InstagramAPI.fetchPopular(lon, lat, function(data){
+	InstagramAPI.fetchGeo(lon, lat, function(data){
 		$scope.pics = data;
     
     
