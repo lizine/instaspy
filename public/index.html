@@ -10,12 +10,14 @@
 
 <div ng-controller="TwitterCtrl as images">
 	 <form>
-	 	<input type="text" ng-model="searchTerm">
-	 	<button class="btn" ng-click="searchTweet()">Search</button>
+	 	<p>Longitude: </p><input type="text"  ng-model="lon">
+	 	<p>Latitude:    </p><input type="text"  ng-model="lat"><br/>
+	 	<button class="btn" ng-click="searchTweet(lon,lat)">Search</button>
 	    </form>
 	     <table>
+
 	     	 <tr ng-repeat="p in pics">
-	     	 	 <td><img ng-src="{{p.images.thumbnail.url}}"/></td>
+	     	 	 <td><img ng-src="{{p.images.thumbnail.url}}"/><br/>{{p.user.username}}</td>
 	     	 	</tr>
 	     	 </table>
 	     	</div>
