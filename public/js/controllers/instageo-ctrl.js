@@ -21,9 +21,40 @@
     }
   }]);
 
+app.factory("GoogleApi", ['$http', function($http){
 
-app.controller('InstaGeoCtrl', function ($scope, InstagramAPI) {
-	
+  return {
+    fetchCoordinates: function(address, callback){
+      var endpoint = "https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&callback=JSON_CALLBACK"
+      $http.get(endpoint).success(function(response){
+        callback(response.results);
+      });
+    }
+
+  }
+}]);
+
+
+
+app.controller('InstaGeoCtrl', function ($scope, InstagramAPI, GoogleApi) {
+	$scope.koordinaatit = {};
+
+
+   $scope.searchAddress = function(address){
+      GoogleApi.fetchCoordinates(address, function(results){
+        var lat = results[0].geometry.location.lat;
+        var lon = results[0].geometry.location.lng;
+
+        InstagramAPI.fetchGeo(lon, lat, function(data){
+    $scope.pics = data;
+    
+    
+
+  });  
+
+      });
+   };
+
 
   
 
