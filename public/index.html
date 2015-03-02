@@ -23,7 +23,7 @@
 	     <table>
 
 	     	 <tr ng-repeat="p in pics">
-	     	 	 <td><img class="img-rounded" ng-src="{{p.images.standard_resolution.url}}"/><br/>{{p.user.username}}</td>
+	     	 	 <td><img class="img-rounded" ng-src="{{p.images.standard_resolution.url}}"/><br/><a href="{{p.link}}" target="_blank"> {{p.user.username}} </a><br/>tags:{{p.tags}}<br/><br/></td>
 	     	 	</tr>
 	     	 </table>
 	     	</div>
